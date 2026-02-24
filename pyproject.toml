@@ -1,0 +1,24 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.backends.legacy:build"
+
+[project]
+name = "djalthingi"
+version = "0.1.0"
+description = "Django app for retrieving, storing and handling Althingi's published XML data"
+requires-python = ">=3.9"
+dependencies = [
+    "cloudscraper",
+    "dateparser",
+    "django>=4.0",
+    "django-ninja",
+    "icalendar",
+    "lxml",
+    "pytz",
+    "requests",
+    "unidecode",
+]
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["djalthingi*"]
