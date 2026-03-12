@@ -31,6 +31,7 @@ from djalthingi.utils import get_last_parliament_num
 from djalthingi.utils import sensible_datetime
 
 from djalthingi.exceptions import AlthingiException
+from importlib.metadata import version
 
 
 class Command(BaseCommand):
@@ -349,6 +350,7 @@ class Command(BaseCommand):
                 # Mark parliament as fully updated.
                 parliament = Parliament.objects.get(parliament_num=parliament_num)
                 parliament.last_full_update = timezone.now()
+                parliament.last_full_update_version = version("djalthingi")
                 parliament.save()
 
         except AlthingiException as e:

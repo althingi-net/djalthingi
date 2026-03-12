@@ -382,6 +382,7 @@ class Parliament(models.Model):
     timing_end = models.DateTimeField(null=True)
 
     last_full_update = models.DateTimeField(default=None, null=True)
+    last_full_update_version = models.CharField(max_length=10, null=True)
 
     def __str__(self):
         return "Parliament %d" % self.parliament_num
