@@ -476,7 +476,25 @@ def update_vote_castings(parliament_num=None, days=None):
         except AttributeError:
             specifics = ""
 
-        session_num = int(xml.find("fundur").text)
+        try:
+            session_num = int(xml.find("fundur").text)
+        except TypeError:
+            # FIXME: This happens when the session in question has mistakenly
+            # not been entered properly into the system on Parliament's side.
+            # Only known to happen in vote nr. 69007 in:
+            #
+            # https://www.althingi.is/altext/xml/atkvaedagreidslur/?lthing=157
+            #
+            # Parliament has been notified and will fix the XML at some point.
+            # We will ignore the problem for now, but once the XML is fixed,
+            # this should result in an error again.
+            print(
+                "WARNING: Found no session number for vote casting %d. Ignoring and moving on." % (
+                    vote_casting_xml_id
+                )
+            )
+            continue
+
         try:
             session = pref_sessions[session_num]
         except KeyError:
