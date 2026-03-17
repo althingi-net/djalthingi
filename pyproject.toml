@@ -22,3 +22,6 @@ dependencies = [
 [tool.setuptools.packages.find]
 where = ["."]
 include = ["djalthingi*"]
+
+[tool.setuptools.exclude-package-data]
+djalthingi = ["xmlcache/*"]
