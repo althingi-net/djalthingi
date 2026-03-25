@@ -12,14 +12,14 @@ STATIC_DOCUMENT_DIR = os.path.join(BASE_DIR, "djalthingi/static")
 XML_CACHE_DIR = os.path.join(BASE_DIR, "djalthingi/xmlcache")
 XML_ERROR_DIR = os.path.join(XML_CACHE_DIR, "invalid")
 
-DOWNLOAD_DOCUMENTS = False
-DOWNLOAD_REVIEWS = False
+DOWNLOAD_DOCUMENTS = os.environ.get("DJALTHINGI_DOWNLOAD_DOCUMENTS", "").lower() == "true"
+DOWNLOAD_REVIEWS = os.environ.get("DJALTHINGI_DOWNLOAD_REVIEWS", "").lower() == "true"
 
 # Development flags
 # - XML_USE_CACHE: Cache XML for no internet or to save bandwidth.
 # - XML_SAVE_INVALID: Save invalid XML files for ability to investigate.
-XML_USE_CACHE = False
-XML_SAVE_INVALID = False
+XML_USE_CACHE = os.environ.get("DJALTHINGI_XML_USE_CACHE", "").lower() == "true"
+XML_SAVE_INVALID = os.environ.get("DJALTHINGI_XML_SAVE_INVALID", "").lower() == "true"
 
 # Timeout in seconds for retrieving remote XML files
 REMOTE_CONTENT_TIMEOUT = 10
@@ -35,5 +35,3 @@ if not os.path.isfile(os.path.join(BASE_DIR, "djalthingi/settings.py")):
             "# Put your custom settings here. See 'djalthingi/althingi_settings.py' for available options.\n"
         )
         f.close()
-
-from djalthingi.settings import *
